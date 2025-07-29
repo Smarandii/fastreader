@@ -28,7 +28,7 @@ services:
       PORT: 5000
     volumes:
       # Persist uploads outside the container
-      - ./fastreader/uploads:/opt/app/fastreader/uploads
+      - ./fastreader:/opt/app/fastreader
 
 volumes:
   db_data:
