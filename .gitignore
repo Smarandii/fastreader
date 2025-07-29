@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Uploads folder (local persistent data)
+fastreader/uploads/
+
+# Local SQLite database used for testing
+*.db
+
+# Virtual environment
+venv/
+
+# Mac OS files
+.DS_Store
