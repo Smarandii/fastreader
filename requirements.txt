@@ -1,0 +1,5 @@
+Flask==3.0.3
+SQLAlchemy==2.0.29
+psycopg2-binary==2.9.9
+Werkzeug==3.0.1
+PyPDF2==3.0.1

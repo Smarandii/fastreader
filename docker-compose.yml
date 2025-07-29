@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: fastreader
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  app:
+    build: .
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8000:5000"
+    environment:
+      # The database URL must match the credentials above and the service name `db`
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/fastreader
+      # Optionally override host and port if needed; defaults are fine
+      HOST: 0.0.0.0
+      PORT: 5000
+    volumes:
+      # Persist uploads outside the container
+      - ./fastreader/uploads:/opt/app/fastreader/uploads
+
+volumes:
+  db_data:
