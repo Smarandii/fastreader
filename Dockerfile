@@ -15,8 +15,10 @@ COPY . /opt/app
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Ensure upload directory exists and owned by appuser
-RUN mkdir -p fastreader/uploads && chown -R appuser:appuser fastreader/uploads
+# Ensure upload directories exist and owned by appuser.  The application
+# uses a root‑level `uploads` folder by default; we also create
+# `fastreader/uploads` for backward compatibility.
+RUN mkdir -p uploads fastreader/uploads && chown -R appuser:appuser uploads fastreader/uploads
 
 USER appuser
 

@@ -16,10 +16,13 @@ class Config:
     # Secret key isn't needed for sessions since we don't provide auth
     SECRET_KEY: str = os.getenv("SECRET_KEY", "dev-key")
 
-    # File storage location; defaults to `uploads` under project root
+    # File storage location; defaults to `uploads` relative to current
+    # working directory.  Using the current working directory makes the
+    # uploads directory easier to mount via docker volumes and avoids
+    # permission issues when the package lives in a read‑only location.
     UPLOAD_FOLDER: str = os.getenv(
         "UPLOAD_FOLDER",
-        os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads"),
+        os.path.join(os.getcwd(), "uploads"),
     )
 
     # Database connection string. When using Docker Compose this

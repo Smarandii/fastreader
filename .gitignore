@@ -4,6 +4,7 @@ __pycache__/
 
 # Uploads folder (local persistent data)
 fastreader/uploads/
+uploads/
 
 # Local SQLite database used for testing
 *.db
