@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FastReader – {{ pdf.filename }}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f9f9f9;
+        overflow-x: hidden;
+      }
+      h1 {
+        margin-bottom: 10px;
+      }
+      .controls {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+      .controls label {
+        margin-right: 10px;
+      }
+      #display {
+        font-size: 2em;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        margin-bottom: 10px;
+      }
+      button {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>{{ pdf.filename }}</h1>
+    <p>
+      Use the controls below to adjust how many words are shown at once and the
+      reading speed in words per minute. Evidence suggests that people can read
+      more than 250 words per minute when words are presented sequentially in
+      one location【846068134740725†L16-L23】. However, comprehension can decline when words are
+      flashed too quickly【453755486846559†L206-L213】, so adjust the speed to a comfortable level.
+    </p>
+    <div class="controls">
+      <label>
+        Words per minute (WPM):
+        <input type="number" id="speedInput" value="300" min="50" max="2000" />
+      </label>
+      <label>
+        Words per chunk:
+        <select id="chunkInput">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3" selected>3</option>
+        </select>
+      </label>
+      <button id="startBtn">Start</button>
+      <button id="pauseBtn" disabled>Pause</button>
+      <button id="resetBtn" disabled>Reset</button>
+    </div>
+    <div id="display"></div>
+    <div id="progress"></div>
+
+    <script src="{{ url_for('static', filename='reader.js') }}"></script>
+    <script>
+      // Initialize reader with PDF id from server
+      window.addEventListener('load', function () {
+        const pdfId = {{ pdf.id }};
+        window.initReader(pdfId);
+      });
+    </script>
+  </body>
+</html>
